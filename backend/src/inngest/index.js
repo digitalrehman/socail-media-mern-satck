@@ -8,9 +8,7 @@ export const inngest = new Inngest({ id: "socail-medias" });
 const userCreated = inngest.createFunction(
   {
     id: "user-created",
-  },
-  {
-    event: "clerk/user.created"
+    triggers: [{ event: "clerk/user.created" }]
   },
   async ({ event }) => {
     let { id, email_addresses, first_name, last_name, image_url } = event.data;
@@ -34,9 +32,7 @@ const userCreated = inngest.createFunction(
 let userUpdated = inngest.createFunction(
   {
     id: "user-updated",
-  },
-  {
-    event: "clerk/user.updated"
+    triggers: [{ event: "clerk/user.updated" }]
   },
   async ({ event }) => {
     let { id, first_name, last_name, image_url } = event.data;
@@ -52,9 +48,7 @@ let userUpdated = inngest.createFunction(
 let userDeleted = inngest.createFunction(
   {
     id: "user-deleted",
-  },
-  {
-    event: "clerk/user.deleted"
+    triggers: [{ event: "clerk/user.deleted" }]
   },
   async ({ event }) => {
     let { id } = event.data;
