@@ -11,6 +11,8 @@ const userCreated = inngest.createFunction(
     triggers: [{ event: "clerk/user.created" }]
   },
   async ({ event }) => {
+    console.log(event);
+
     let { id, email_addresses, first_name, last_name, image_url } = event.data;
     let username = email_addresses[0].email_address.split("@")[0];
 
