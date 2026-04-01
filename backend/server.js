@@ -6,6 +6,7 @@ import "dotenv/config"
 import { serve } from "inngest/express";
 import { inngest, functions } from "./src/inngest/index.js";
 import dbConnection from "./src/config/db.js";
+import { clerkMiddleware } from '@clerk/express'
 let app = express();
 let port = process.env.PORT || 3000;
 dbConnection()
@@ -13,6 +14,7 @@ dbConnection()
 app.use(express.json());
 app.use(cors());
 app.use(cookieParser());
+app.use(clerkMiddleware())      
 
 
 app.use("/api", router);
