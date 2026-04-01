@@ -8,10 +8,17 @@ import Discover from "../pages/Discover";
 import Profile from "../pages/Profile";
 import EditProfile from "../pages/EditProfile";
 import CreatePost from "../pages/CreatePost";
-import { useUser } from "@clerk/react";
+import { useAuth, useUser } from "@clerk/react";
 import Layout from "../pages/Layout";
+import { useEffect } from "react";
 const Router = () => {
   let { user } = useUser();
+  let { getToken } = useAuth();
+  useEffect(() => {
+    getToken().then((token) => {
+      console.log(token);
+    });
+  }, [user]);
 
   return (
     <Routes>
