@@ -8,7 +8,9 @@ export const inngest = new Inngest({ id: "socail-medias" });
 const userCreated = inngest.createFunction(
   {
     id: "user-created",
-    triggers: [{ event: "clerk/user.created" }]
+  },
+  {
+    event: "clerk/user.created"
   },
   async ({ event }) => {
     let { id, email_addresses, first_name, last_name, image_url } = event.data;
@@ -26,14 +28,15 @@ const userCreated = inngest.createFunction(
       profile_picture: image_url,
     };
     await User.create(newUser);
-    return { message: "User created successfully" };
   }
 );
 
 let userUpdated = inngest.createFunction(
   {
     id: "user-updated",
-    triggers: [{ event: "clerk/user.updated" }]
+  },
+  {
+    event: "clerk/user.updated"
   },
   async ({ event }) => {
     let { id, first_name, last_name, image_url } = event.data;
@@ -43,19 +46,19 @@ let userUpdated = inngest.createFunction(
       profile_picture: image_url,
     };
     await User.findByIdAndUpdate(id, updatedUser);
-    return { message: "User updated successfully" };
   }
 );
 
 let userDeleted = inngest.createFunction(
   {
     id: "user-deleted",
-    triggers: [{ event: "clerk/user.deleted" }]
+  },
+  {
+    event: "clerk/user.deleted"
   },
   async ({ event }) => {
     let { id } = event.data;
     await User.findByIdAndDelete(id);
-    return { message: "User deleted successfully" };
   }
 );
 
